@@ -30,7 +30,7 @@ void Vector::push_back(const int value) {
     data[size++] = value;
 }
 
-void Vector::push_front(int value) {
+void Vector::push_front(const int value) {
     if (size == capacity) {
         resize(capacity == 0 ? 1 : capacity * 2);
     }
@@ -84,4 +84,66 @@ void Vector::printVec() const {
 
 size_t Vector::getSize() const {
     return size;
+}
+
+Vector Vector::operator+(const Vector& other) const {
+    if (this->size != other.size) {
+        cerr << "Векторы должны иметь одинаковый размер для сложения" << endl;
+        return Vector(0);
+    }
+
+    Vector result(this->size);
+    for (size_t i = 0; i < this->size; ++i) {
+        result.data[i] = this->data[i] + other.data[i];
+    }
+    return result;
+}
+
+Vector Vector::operator-(const Vector& other) const {
+    if (this->size != other.size) {
+        cerr << "Векторы должны иметь одинаковый размер для вычитания" << endl;
+        return Vector(0);
+    }
+
+    Vector result(this->size);
+    for (size_t i = 0; i < this->size; ++i) {
+        result.data[i] = this->data[i] - other.data[i];
+    }
+    return result;
+}
+
+Vector Vector::operator*(const int scalar) const {
+    Vector result(this->size);
+    for (size_t i = 0; i < this->size; ++i) {
+        result.data[i] = this->data[i] * scalar;
+    }
+    return result;
+}
+
+bool Vector::operator==(const Vector& other) const {
+    if (this->size != other.size) return false;
+    for (size_t i = 0; i < this->size; ++i) {
+        if (this->data[i] != other.data[i]) return false;
+    }
+    return true;
+}
+
+bool Vector::operator!=(const Vector& other) const {
+    return !(*this == other);
+}
+
+bool Vector::operator<(const Vector& other) const {
+    return this->size < other.size;
+}
+
+bool Vector::operator>(const Vector& other) const {
+    return this->size > other.size;
+}
+
+bool Vector::operator<=(const Vector& other) const {
+    return this->size <= other.size;
+}
+
+bool Vector::operator>=(const Vector& other) const {
+    return this->size >= other.size;
 }

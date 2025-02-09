@@ -10,24 +10,26 @@ class Vector {
 
 public:
     Vector();
-
     Vector(size_t size);
-
     ~Vector();
-
     void push_back(int value);
-
     void push_front(int value);
-
     void emplace(size_t index, int value);
-
     void reversed() const;
-
     void fillVec(int value) const;
-
     void printVec() const;
-
     size_t getSize() const;
+
+    Vector operator+(const Vector& other) const;
+    Vector operator-(const Vector& other) const;
+    Vector operator*(int scalar) const;
+
+    bool operator==(const Vector& other) const;
+    bool operator!=(const Vector& other) const;
+    bool operator<(const Vector& other) const;
+    bool operator>(const Vector& other) const;
+    bool operator<=(const Vector& other) const;
+    bool operator>=(const Vector& other) const;
 };
 
 #endif
